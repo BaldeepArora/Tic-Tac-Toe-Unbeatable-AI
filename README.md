@@ -24,19 +24,16 @@ Follow the steps below to set up the project locally:
 
    ```bash
    git clone https://github.com/BaldeepArora/Tic-Tac-Toe-Unbeatable-AI.git
-2. Navigate to the project directory:
-  ```bash
-    cd TicTacToe-Unbeatable-AI
-  ```
-3. Install dependencies:
+
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt 
    ```
-4.   Run the Flask app:
+3.   Run the Flask app:
    ```bash
    python app.py
    ```
-5. Open the Game:
+4. Open the Game:
 Go to your browser and open http://127.0.0.1:5000/ to start playing the game.
 
 ## How to Play

@@ -48,7 +48,7 @@ Go to your browser and open http://127.0.0.1:5000/ to start playing the game.
 
 Check out the demo video of the game:
 
-[Watch the Demo Video](https://github.com/BaldeepArora/Tic-Tac-Toe-Unbeatable-AI.git/demo.mkv)
+[Watch the Demo Video](https://github.com/BaldeepArora/Tic-Tac-Toe-Unbeatable-AI/blob/main/demo.mkv)
 
 > Note: Click the link above to watch or download the `.mkv` video file.
 

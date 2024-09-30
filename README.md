@@ -24,7 +24,7 @@ Follow the steps below to set up the project locally:
 
    ```bash
    git clone https://github.com/BaldeepArora/Tic-Tac-Toe-Unbeatable-AI.git
- 2. Navigate to the project directory:
+2. Navigate to the project directory:
   ```bash
     cd TicTacToe-Unbeatable-AI
   ```

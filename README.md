@@ -27,7 +27,7 @@ Follow the steps below to set up the project locally:
  2. Navigate to the project directory:
   ```bash
     cd TicTacToe-Unbeatable-AI
-```
+  ```
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt 
@@ -36,5 +36,16 @@ Follow the steps below to set up the project locally:
    ```bash
    python app.py
    ```
+5. Open the Game:
+Go to your browser and open http://127.0.0.1:5000/ to start playing the game.
 
-  
+## How to Play
+- The goal is to get three of your symbols ('X') in a row—vertically, horizontally, or diagonally.
+- The AI opponent will always play as 'O' and will make the first move.
+- Simply click on a cell to make your move and try to beat the AI (if you can!).
+
+## Video Demo
+
+Check out a demo of the game in action:
+
+[![Watch the demo](https://img.youtube.com/vi/VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID_HERE)

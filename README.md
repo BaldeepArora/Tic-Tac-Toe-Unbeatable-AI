@@ -23,8 +23,8 @@ Follow the steps below to set up the project locally:
 1. **Clone the repository:**
 
    ```bash
-   git clone <repository-url>
- 2. Navigate to the project directory:
+   git clone https://github.com/BaldeepArora/Tic-Tac-Toe-Unbeatable-AI.git
+2. Navigate to the project directory:
   ```bash
     cd TicTacToe-Unbeatable-AI
   ```
@@ -46,6 +46,14 @@ Go to your browser and open http://127.0.0.1:5000/ to start playing the game.
 
 ## Video Demo
 
-Check out a demo of the game in action:
+Check out the demo video of the game:
 
-[![Watch the demo](https://img.youtube.com/vi/VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID_HERE)
+You can see the app in action in the video below:
+<video width="600" controls>
+  <source src="demo.mkv" type="video/mkv">
+</video>
+
+[Watch the Demo Video](https://github.com/BaldeepArora/Tic-Tac-Toe-Unbeatable-AI/blob/main/demo.mkv)
+
+> Note: Click the link above to watch or download the `.mkv` video file.
+

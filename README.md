@@ -46,6 +46,9 @@ Go to your browser and open http://127.0.0.1:5000/ to start playing the game.
 
 ## Video Demo
 
-Check out a demo of the game in action:
+Check out the demo video of the game:
 
-[![Watch the demo](https://img.youtube.com/vi/VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID_HERE)
+[Watch the Demo Video](https://github.com/your-username/your-repository-name/blob/main/path/to/your-video-file.mkv)
+
+> Note: Click the link above to watch or download the `.mkv` video file.
+

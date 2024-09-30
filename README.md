@@ -23,7 +23,18 @@ Follow the steps below to set up the project locally:
 1. **Clone the repository:**
 
    ```bash
-   git clone <repository-url>```
+   git clone <repository-url>
  2. Navigate to the project directory:
-  ``` cd TicTacToe-Unbeatable-AI```
+  ```bash
+    cd TicTacToe-Unbeatable-AI
+```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt 
+   ```
+4.   Run the Flask app:
+   ```bash
+   python app.py
+   ```
+
   

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic-Tac-Toe: Unbeatable AI</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #ff5722;
+            margin-top: 30px;
+        }
+        #game {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            width: 120px;
+            height: 120px;
+            font-size: 80px;
+            text-align: center;
+            border: 2px solid #ff5722;
+            cursor: pointer;
+            background-color: #333;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        td:hover {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+        #message {
+            text-align: center;
+            font-size: 24px;
+            color: #ff9800;
+            margin-top: 20px;
+        }
+        #reset {
+            display: block;
+            margin: 30px auto;
+            font-size: 18px;
+            padding: 10px 30px;
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        #reset:hover {
+            background-color: #e64a19;
+            box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+        }
+        #cpu-thinking {
+            text-align: center;
+            font-size: 20px;
+            color: #ff9800;
+            margin-top: 10px;
+        }
+        #cpu-win-gif, #draw-gif {
+            display: none;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .disabled td {
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        @media (max-width: 600px) {
+            td {
+                width: 80px;
+                height: 80px;
+                font-size: 60px;
+            }
+            iframe {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic-Tac-Toe: Unbeatable AI</h1>
+    <div id="game">
+        <table>
+            <tr>
+                <td id="0"></td>
+                <td id="1"></td>
+                <td id="2"></td>
+            </tr>
+            <tr>
+                <td id="3"></td>
+                <td id="4"></td>
+                <td id="5"></td>
+            </tr>
+            <tr>
+                <td id="6"></td>
+                <td id="7"></td>
+                <td id="8"></td>
+            </tr>
+        </table>
+    </div>
+    <p id="message"></p>
+    <div id="cpu-thinking"></div>
+    <div id="cpu-win-gif">
+        <iframe src="https://giphy.com/embed/o75ajIFH0QnQC3nCeD" width="480" height="398" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </div>
+    <div id="draw-gif">
+        <iframe src="https://giphy.com/embed/A0KitrLeiHw52" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </div>
+    <button id="reset">Reset Game</button>
+    <script>
+        let board = ['', '', '', '', '', '', '', '', ''];
+        const cells = document.querySelectorAll('td');
+        const message = document.getElementById('message');
+        const resetButton = document.getElementById('reset');
+        const cpuThinking = document.getElementById('cpu-thinking');
+        const cpuWinGif = document.getElementById('cpu-win-gif');
+        const drawGif = document.getElementById('draw-gif');
+        const gameTable = document.querySelector('table');
+
+        function updateBoard() {
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(i.toString()).innerText = board[i];
+            }
+        }
+
+        function disableBoard() {
+            gameTable.classList.add('disabled');
+        }
+
+        function enableBoard() {
+            gameTable.classList.remove('disabled');
+        }
+
+        function startGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            updateBoard();
+            message.innerText = '';
+            cpuWinGif.style.display = 'none';
+            drawGif.style.display = 'none';
+            cpuThinking.innerText = '';
+            disableBoard();
+            cpuThinking.innerText = 'CPU is making the first move...';
+
+            fetch('/start', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then(response => response.json())
+            .then(data => {
+                board = data.board;
+                setTimeout(() => {
+                    cpuMove();
+                }, 2000); // 2-second delay before CPU makes the first move
+            });
+        }
+
+        function cpuMove() {
+            fetch('/cpu_move', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({'board': board})
+            })
+            .then(response => response.json())
+            .then(data => {
+                board = data.board;
+                updateBoard();
+                cpuThinking.innerText = '';
+                if (data.status === 'lose') {
+                    message.innerText = 'You Lose! Try Again.';
+                    disableBoard();
+                    cpuWinGif.style.display = 'block';
+                } else if (data.status === 'draw') {
+                    message.innerText = 'It\'s a Draw!';
+                    disableBoard();
+                    drawGif.style.display = 'block';
+                } else {
+                    enableBoard();
+                }
+            });
+        }
+
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                let index = parseInt(cell.id);
+                if (board[index] === '') {
+                    board[index] = 'X';
+                    updateBoard();
+                    disableBoard();
+                    fetch('/move', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({'board': board, 'move': index})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        board = data.board;
+                        if (data.status === 'win') {
+                            message.innerText = 'Congratulations! You Win!';
+                            cpuThinking.innerText = '';
+                            disableBoard();
+                        } else if (data.status === 'draw') {
+                            message.innerText = 'It\'s a Draw!';
+                            cpuThinking.innerText = '';
+                            disableBoard();
+                            drawGif.style.display = 'block';
+                        } else {
+                            cpuThinking.innerText = 'CPU is thinking...';
+                            setTimeout(() => {
+                                cpuMove();
+                            }, 2000); // 2-second delay before CPU makes its move
+                        }
+                    });
+                }
+            });
+        });
+
+        resetButton.addEventListener('click', () => {
+            startGame();
+        });
+
+        // Start the game when the page loads
+        window.onload = startGame;
+    </script>
+</body>
+</html>
